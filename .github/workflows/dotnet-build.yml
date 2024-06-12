@@ -1,0 +1,22 @@
+name: dotnet-build.yml
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'  # Substitua pela versão do .NET desejada
+      - name: Build
+        run: dotnet build  # Executa o comando de build do seu projeto
+      - name: Test
+        run: dotnet test  # Executa os testes. Caso nao tenha teste deletar/comentar linha 19 e 20
+      - name: Publish
+        run: dotnet publish -c Release
